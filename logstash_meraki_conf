@@ -1,7 +1,7 @@
 input {
 http_poller {
 urls => {
-"MX_Aalsmeer" => {
+"MX_Amsterdam" => {
 method => get
 url => "https://dashboard.meraki.com/api/v0/networks/NETWORK-ID-HERE/devices/SERIAL-NUMBER-HERE/performance"
 headers => {
