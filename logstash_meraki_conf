@@ -1,0 +1,23 @@
+input {
+http_poller {
+urls => {
+"MX_Aalsmeer" => {
+method => get
+url => "https://dashboard.meraki.com/api/v0/networks/NETWORK-ID-HERE/devices/SERIAL-NUMBER-HERE/performance"
+headers => {
+Accept => "application/json"
+"x-cisco-meraki-api-key" => "YOUR-API-KEY-HERE"
+}
+}
+}
+request_timeout => 60
+    # Supports "cron", "every", "at" and "in" schedules by rufus scheduler
+    schedule => { every => "180s"}
+    codec => "json"
+    # A hash of request metadata info (timing, response headers, etc.) will be sent here
+     metadata_target => "http_poller_metadata"
+  }
+}
+output {
+  elasticsearch { hosts => ["localhost:9200"] }
+  stdout { codec => rubydebug }
